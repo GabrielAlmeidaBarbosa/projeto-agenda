@@ -1,5 +1,6 @@
 const globalMiddleware = (req, res, next) => {
-    console.log('-> Passei no middlware global');
+    res.locals.errors = req.flash('errors');
+    res.locals.success = req.flash('success');
     next();
 };
 

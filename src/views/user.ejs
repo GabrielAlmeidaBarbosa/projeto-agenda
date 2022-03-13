@@ -8,20 +8,22 @@
 		<div class="col-lg-8 my-5">
 			<h1 class="text-center">Acessar o sistema</h1>
 
+			<%- include('includes/messages') %>
+
 			<div class="row">
 				<div class="col-lg-5 my-5">
 					<h4 class="text-center">Cadastro</h4>
 					<p>Se você ainda não tem uma conta, crie uma abaixo:</p>
 
-					<form action="/login/register" method="post">
+					<form action="/user/create" method="post">
 						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						<div class="form-group">
 							<label for="inputEmail">Email</label>
-							<input type="email" class="form-control" id="inputEmail" placeholder="email@email.com">
+							<input type="email" class="form-control" name="email" id="inputEmail" placeholder="email@email.com">
 						  </div>
 						  <div class="form-group">
 							<label for="inputPassword">Senha</label>
-							<input type="password" class="form-control" id="inputPassword" placeholder="Senha">
+							<input type="password" class="form-control" name="password" id="inputPassword" placeholder="Senha">
 						  </div>
 						<button type="submit" class="btn btn-primary">Cadastrar</button>
 					</form>
@@ -33,15 +35,15 @@
 					<h4 class="text-center">Login</h4>
 					<p>Se você já tem uma conta, faça login abaixo:</p>
 
-					<form action="/login/connect" method="post">
+					<form action="/user/login" method="post">
 						<input type="hidden" name="_csrf" value="<%= csrfToken %>">
 						<div class="form-group">
 						  <label for="inputEmail">Email</label>
-						  <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="email@email.com">
+						  <input type="email" class="form-control" name="email" id="inputEmail" placeholder="email@email.com">
 						</div>
 						<div class="form-group">
 						  <label for="inputPassword">Senha</label>
-						  <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Senha">
+						  <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Senha">
 						</div>
 						<button type="submit" class="btn btn-info">Entrar</button>
 					</form>
