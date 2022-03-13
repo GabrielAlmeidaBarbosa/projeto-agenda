@@ -18,8 +18,9 @@ class User {
 
     async create() {
         this.validate();
+        if (this.errors.length > 0) return;
+        
         await this.userExists();
-
         if (this.errors.length > 0) return;
 
         const salt = bcrypt.genSaltSync();
