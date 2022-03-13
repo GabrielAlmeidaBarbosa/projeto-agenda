@@ -87,7 +87,7 @@ app.use(routes);
 app.on('connectionSuccess', () => {
     app.listen(3000, () => {
         console.log('Servidor executando...');
-        console.log('Acessar servidor: http://127.0.0.1:3000/');
+        console.log('Acessar servidor: http://127.0.0.1:3000/index');
         console.log('----------------------------------------');
     });
 });

@@ -1,7 +1,3 @@
-const homePage = (req, res) => res.render('index', {
-    title: 'This is my title'
-});
+const index = (req, res) => res.render('index');
 
-const dataProcessing = (req, res) => res.send(req.body);
-
-module.exports = { homePage, dataProcessing };
+module.exports = { index };

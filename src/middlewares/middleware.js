@@ -1,13 +1,13 @@
 const globalMiddleware = (req, res, next) => {
-    console.log();
-    console.log('Passei no middlware global');
-    console.log();
+    console.log('-> Passei no middlware global');
     next();
 };
 
 const checkCsrfError = (err, req, res, next) => {
-    if (err && 'EBADCSRFTOKEN' === err.code)
+    if (err) {
         return res.render('error404');
+    }
+    next();
 };
 
 const csrfMiddleware = (req, res, next) => {
