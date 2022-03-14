@@ -25,12 +25,25 @@ class User {
 
         const salt = bcrypt.genSaltSync();
         this.body.password = bcrypt.hashSync(this.body.password, salt);
-        try {
-            this.user = await UserModel.create(this.body);
-        } catch (err) {
-            console.log(err);
-        }
+        this.user = await UserModel.create(this.body);
         return;
+    }
+
+    async login() {
+        this.validate();
+        if (this.errors.length > 0) return;
+
+        this.user = await UserModel.findOne({ email: this.body.email });
+        if (!this.user) {
+            this.errors.push('Email inválido.');
+            return;
+        }
+
+        if (!bcrypt.compareSync(this.body.password, this.user.password)) {
+            this.errors.push('Senha inválida.');
+            this.user = null;
+            return;
+        }
     }
 
     validate() {

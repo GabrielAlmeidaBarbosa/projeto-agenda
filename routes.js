@@ -10,5 +10,7 @@ route.get('/index', homeController.index);
 /* Rotas de usuários (Cadastro, login...) */
 route.get('/user/index', userController.index);
 route.post('/user/create', userController.create);
+route.post('/user/login', userController.login);
+route.get('/user/logout', userController.logout);
 
 module.exports = route;
