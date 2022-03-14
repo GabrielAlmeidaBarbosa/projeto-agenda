@@ -29,6 +29,19 @@ class Contact {
         }
     }
 
+    async edit(id) {
+        this.validate();
+        if (this.errors.length > 0) return;
+
+        try {
+            this.contact = await ContactModel.findByIdAndUpdate(id, this.body, { 
+                new: true 
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     validate() {
         this.cleanUp();
 

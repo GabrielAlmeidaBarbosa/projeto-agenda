@@ -24,7 +24,7 @@ const register = async (req, res) => {
     }
 };
 
-const update = async (req, res) => {
+const editIndex = async (req, res) => {
     if (!req.params.id) return res.render('error404');
     try {
         const contact = await Contact.findById(req.params.id);
@@ -37,4 +37,26 @@ const update = async (req, res) => {
     
 };
 
-module.exports = { index, register, update };
+const edit = async (req, res) => {
+    if (typeof req.params.id !== 'string') return res.render('error404');
+    try {
+        const contact = new Contact(req.body);
+        await contact.edit(req.params.id);
+
+        if (contact.errors.length > 0) {
+            req.flash('errors', contact.errors);
+            req.session.save(() => {
+               return res.redirect('/contacts/index')
+            });
+            return;
+        }
+
+        req.flash('success', 'Contato editado com sucesso.');
+        req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`));
+        return;
+    } catch (error) {
+        
+    }
+};
+
+module.exports = { index, register, editIndex, edit };
