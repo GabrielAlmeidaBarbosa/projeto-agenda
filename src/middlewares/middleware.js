@@ -17,4 +17,18 @@ const csrfMiddleware = (req, res, next) => {
     next();
 };
 
-module.exports = { globalMiddleware, checkCsrfError, csrfMiddleware };
+const loginRequired = (req, res, next) => {
+    if (!req.session.user) {
+        req.flash('errors', 'Você precisa fazer login.');
+        req.session.save(() => res.redirect('/index'));
+        return;
+    }
+    next();
+};
+
+module.exports = { 
+    globalMiddleware, 
+    checkCsrfError, 
+    csrfMiddleware, 
+    loginRequired 
+};
