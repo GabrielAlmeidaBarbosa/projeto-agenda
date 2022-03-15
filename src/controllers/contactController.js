@@ -54,9 +54,23 @@ const edit = async (req, res) => {
         req.flash('success', 'Contato editado com sucesso.');
         req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`));
         return;
-    } catch (error) {
-        
+    } catch (err) {
+        console.log(err);
+        res.render('error404');
     }
 };
 
-module.exports = { index, register, editIndex, edit };
+const exclude = async (req, res) => {
+    if (!req.params.id) return res.render('error404');
+    try {
+        const contact = await Contact.exclude(req.params.id);
+        req.flash('success', `Contato "${contact.name}" deletado com sucesso.`);
+        req.session.save(() => res.redirect(`/index`));
+        return;
+    } catch (err) {
+        console.log(err);
+        res.render('error404');
+    }
+};
+
+module.exports = { index, register, editIndex, edit, exclude };

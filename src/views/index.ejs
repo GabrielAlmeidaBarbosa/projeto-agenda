@@ -12,17 +12,42 @@
 			</p>
 
 			<%- include('includes/messages') %>
-
+			
+			<% if (contacts.length > 0) { %>
 			<div class="responsive-table">
 				<table class="table my-2">
-					<tr>
-						<td>Gabriel</td>
-						<td>Barbosa</td>
-						<td>99 999999999</td>
-						<td>gabriel@gmail.com</td>
-					</tr>
+					<% contacts.forEach(contact => { %>
+						<tr>
+							<td><%= contact.name %></td>
+							<% %>
+							<td><%= contact.lastName %></td>
+							<td><%= contact.phone %></td>
+							<td><%= contact.email %></td>
+							<td>
+								<a href="/contacts/index/<%= contact._id %>" 
+									class="text-info">
+									<button type="button" 
+										class="btn btn-primary btn-sm">
+										Editar
+									</button>
+								</a>
+							</td>
+							<td>
+								<a href="/contacts/delete/<%= contact._id %>" 
+									class="text-danger">
+									<button type="button" 
+										class="btn btn-danger btn-sm">
+										Excluir
+									</button>
+								</a>
+							</td>
+						</tr>
+					<% }); %>
 				</table>
 			</div>
+			<% } else { %>
+				<p class="text-center lead">Não há contatos registrados.</p>
+			<% } %>
 		</div>
 		
 		<div class="col-lg-2"></div>

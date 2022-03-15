@@ -70,6 +70,17 @@ class Contact {
         };
     }
 
+    static async list() {
+        const contacts = await ContactModel.find().sort({ createdAt: -1 });
+        return contacts;
+    }
+
+    static async exclude(id) {
+        if (typeof id !== 'string') return;
+        const contact = await ContactModel.findByIdAndDelete(id);
+        return contact;
+    }
+
     static async findById(id) {
         if (typeof id !== 'string') return;
         const user = await ContactModel.findById(id);
