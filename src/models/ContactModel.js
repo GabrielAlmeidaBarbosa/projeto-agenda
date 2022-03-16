@@ -6,7 +6,8 @@ const ContactSchema = new mongoose.Schema({
     lastName: { type: String, required: false, default: '' },
     email: { type: String, required: false, default: '' },
     phone: { type: String, required: false, default: '' },
-    createdAt: { type: Date, default: Date.now() }
+    createdAt: { type: Date, default: Date.now() },
+    createdBy: { type: String, required: true }
 });
 
 const ContactModel = mongoose.model('Contact', ContactSchema);
@@ -66,12 +67,14 @@ class Contact {
             name: this.body.name,
             lastName: this.body.lastName,
             email: this.body.email,
-            phone: this.body.phone
+            phone: this.body.phone,
+            createdBy: this.body.createdBy
         };
     }
 
-    static async list() {
-        const contacts = await ContactModel.find().sort({ createdAt: -1 });
+    static async list(userId) {
+        const contacts = await ContactModel.find({ createdBy: userId })
+            .sort({ createdAt: -1 });
         return contacts;
     }
 

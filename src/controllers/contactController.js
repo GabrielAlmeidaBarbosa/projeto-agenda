@@ -4,6 +4,7 @@ const index = (req, res) => res.render('contact', { contact: {} });
 
 const register = async (req, res) => {
     try {
+        req.body.createdBy = req.session.user._id;
         const contact = new Contact(req.body);
         await contact.register();
 
@@ -14,7 +15,7 @@ const register = async (req, res) => {
             });
             return;
         }
-
+        
         req.flash('success', 'Contato salvo com sucesso.');
         req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`));
         return;
@@ -40,6 +41,7 @@ const editIndex = async (req, res) => {
 const edit = async (req, res) => {
     if (typeof req.params.id !== 'string') return res.render('error404');
     try {
+        req.body.createdBy = req.session.user._id;
         const contact = new Contact(req.body);
         await contact.edit(req.params.id);
 

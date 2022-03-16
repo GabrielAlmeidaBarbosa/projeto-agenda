@@ -9,15 +9,27 @@
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <% if(!user) { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/index">Entrar</a>
+                        <a class="nav-link" href="/user/index">
+                            <button type="button" class="btn btn-secondary">
+                                Entrar
+                            </button>
+                        </a>
                     </li>
                 <% } else { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contacts/index">Criar contato</a>
+                        <a class="nav-link" href="/contacts/index">
+                            <button type="button" class="btn btn-secondary">
+                                Criar contato
+                            </button>
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/logout">Sair</a>
+                        <a class="nav-link" href="/user/logout">
+                            <button type="button" class="btn btn-secondary">
+                                Sair
+                            </button>
+                        </a>
                     </li>
                 <% } %>
             </ul>

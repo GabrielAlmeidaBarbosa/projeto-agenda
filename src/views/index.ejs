@@ -13,40 +13,44 @@
 
 			<%- include('includes/messages') %>
 			
-			<% if (contacts.length > 0) { %>
-			<div class="responsive-table">
-				<table class="table my-2">
-					<% contacts.forEach(contact => { %>
-						<tr>
-							<td><%= contact.name %></td>
-							<% %>
-							<td><%= contact.lastName %></td>
-							<td><%= contact.phone %></td>
-							<td><%= contact.email %></td>
-							<td>
-								<a href="/contacts/index/<%= contact._id %>" 
-									class="text-info">
-									<button type="button" 
-										class="btn btn-primary btn-sm">
-										Editar
-									</button>
-								</a>
-							</td>
-							<td>
-								<a href="/contacts/delete/<%= contact._id %>" 
-									class="text-danger">
-									<button type="button" 
-										class="btn btn-danger btn-sm">
-										Excluir
-									</button>
-								</a>
-							</td>
-						</tr>
-					<% }); %>
-				</table>
-			</div>
+			<% if (logged) { %>
+				<% if (contacts.length > 0) { %>
+				<div class="responsive-table">
+					<table class="table">
+						<% contacts.forEach(contact => { %>
+							<tr>
+								<td><%= contact.name %></td>
+								<% %>
+								<td><%= contact.lastName %></td>
+								<td><%= contact.phone %></td>
+								<td><%= contact.email %></td>
+								<td>
+									<a href="/contacts/index/<%= contact._id %>" 
+										class="text-info">
+										<button type="button" 
+											class="btn btn-primary btn-sm">
+											Editar
+										</button>
+									</a>
+								</td>
+								<td>
+									<a href="/contacts/delete/<%= contact._id %>" 
+										class="text-danger">
+										<button type="button" 
+											class="btn btn-danger btn-sm">
+											Excluir
+										</button>
+									</a>
+								</td>
+							</tr>
+						<% }); %>
+					</table>
+				</div>
+				<% } else { %>
+					<p class="text-center lead">Não há contatos salvos.</p>
+				<% } %>
 			<% } else { %>
-				<p class="text-center lead">Não há contatos registrados.</p>
+				<p class="text-center lead">Entre na sua conta para salvar seus contatos.</p>
 			<% } %>
 		</div>
 		
